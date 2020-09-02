@@ -1,4 +1,4 @@
-# sample-work
+# sample
 Sample Work for Resume:
 
 Hi all,
