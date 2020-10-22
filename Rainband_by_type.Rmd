@@ -1,0 +1,128 @@
+---
+title: "Rainband Analysis"
+author: "Rowan Pan"
+date: "10/19/2020"
+output: rmarkdown::github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(ggplot2)
+rainbands_grouped <- read.csv('rainband_grouped.csv')
+head(rainbands_grouped)
+
+```
+
+
+```{r, message = F, fig.width = 6, fig.height = 4, echo = F, fig.align = 'center'}
+
+ggplot(rainbands_grouped, aes(x = decimaldate, y = averagelat , color = lonmax-lonmin)) + geom_point(size = 1.5) + geom_smooth(method ='loess', span = 0.10, color = 'yellow') + labs(title = 'Latitude and Length of Rainband (Across All)', y = 'Average Latitude North', x = 'Month') + 
+  scale_x_continuous("Latitude and Length of Rainband", breaks = seq(1,12,1)) +
+  scale_y_continuous("Average Latitude North", breaks = seq(26,36,2)) 
+
+```
+
+\newpage
+
+## El Niño
+```{r}
+el_nino <- read.csv('el_nino_rainband.csv')
+cat('Number of rows:', nrow(el_nino))
+head(el_nino)
+
+```
+
+
+```{r, message = F, fig.width = 6, fig.height = 4, echo = F, fig.align = 'center'}
+
+ggplot(el_nino, aes(x = decimaldate, y = averagelat , color = lonmax-lonmin)) + geom_point(size = 1.5) + geom_smooth(method = 'loess', span = 0.10, color = 'orange') + labs(title = 'Latitude and Length of Rainband After El Nino Year ', y = 'Average Latitude North', x = 'Month') + 
+  scale_x_continuous("Latitude and Length of Rainband", breaks = seq(1,12,1)) + 
+  scale_y_continuous("Average Latitude North", breaks = seq(26,36,2)) 
+
+
+
+```
+
+\newpage
+
+## La Niña 
+```{r}
+la_nina <- read.csv('la_nina_rainband.csv')
+cat('Number of rows:', nrow(la_nina))
+head(la_nina)
+
+```
+
+
+```{r, message = F, fig.width = 6, fig.height = 4, echo = F, fig.align = 'center'}
+
+ggplot(la_nina, aes(x = decimaldate, y = averagelat , color = lonmax-lonmin)) + geom_point(size = 1.5) + geom_smooth(method = 'loess', span = 0.10, color = 'red') + labs(title = 'Latitude and Length of Rainband After La Nina Year ', y = 'Average Latitude North', x = 'Month') + 
+  scale_x_continuous("Latitude and Length of Rainband", breaks = seq(1,12,1)) +
+  scale_y_continuous("Average Latitude North", breaks = seq(26,36,2)) 
+
+
+
+```
+
+\newpage
+##  Neutral
+```{r}
+neutral <- read.csv('neutral_rainband.csv')
+cat('Number of rows:', nrow(neutral))
+head(neutral)
+
+```
+
+
+```{r, message = F, fig.width = 6, fig.height = 4, echo = F, fig.align = 'center'}
+
+ggplot(neutral, aes(x = decimaldate, y = averagelat , color = lonmax-lonmin)) + geom_point(size = 1.5) + geom_smooth(method = 'loess', span = 0.10, color = 'violet') + labs(title = 'Latitude and Length of Rainband After Neutral Year ', y = 'Average Latitude North', x = 'Month') +
+  scale_x_continuous("Latitude and Length of Rainband", breaks = seq(1,12,1)) + scale_y_continuous("Average Latitude North", breaks = seq(26,36,2)) 
+
+
+
+```
+
+
+\newpage
+## Together By Type
+```{r}
+by_type <- read.csv('full_rainband_by_type.csv')
+cat('Number of rows:', nrow(by_type)) # el nino, la nina, and then neutral
+head(by_type)
+
+```
+
+
+
+```{r, message = F, fig.width = 6, fig.height = 4, echo = F, fig.align = 'center'}
+
+
+
+ggplot(by_type, aes(x = decimaldate, y = averagelat , color = type, fill = type)) + geom_smooth(se = F) + labs(title = 'Latitude and Length of Rainband Based on Type (Smoothed)', y = 'Average Latitude North', x = 'Month') +
+  scale_x_continuous("Latitude and Length of Rainband", breaks = seq(1,12,1)) 
+ 
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
